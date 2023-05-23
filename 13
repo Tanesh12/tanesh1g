@@ -1,0 +1,31 @@
+def solution(A):
+    stack = []
+    count = 0
+    index = -1
+    
+    for i in range(len(A)):
+        if len(stack) == 0:
+            stack.append(A[i])
+            count += 1
+            index = i
+        else:
+            if A[i] == stack[-1]:
+                count += 1
+            else:
+                count -= 1
+            
+            if count == 0:
+                stack.pop()
+                count = 0
+                index = -1
+    
+    if stack:
+        candidate = stack[-1]
+        count = 0
+        for i in range(len(A)):
+            if A[i] == candidate:
+                count += 1
+                if count > len(A)//2:
+                    return i
+    
+    return -1
